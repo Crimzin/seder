@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Story of Passover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --wine: #5B1A2E;
+    --wine-deep: #3D0F1E;
+    --wine-light: #8B3A52;
+    --gold: #C9A84C;
+    --gold-dim: #A68A3E;
+    --gold-bright: #E2C36B;
+    --parchment: #F0E6D3;
+    --parchment-dark: #D9CBAF;
+    --ink: #2A1A0E;
+    --ink-light: #5C4A3A;
+    --cream: #FAF6EE;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--wine-deep);
+    color: var(--ink);
+    font-family: 'EB Garamond', 'Georgia', serif;
+    font-size: 19px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 0%, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(91, 26, 46, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    text-align: center;
+    padding: 60px 0 40px;
+  }
+
+  .header-ornament {
+    display: block;
+    color: var(--gold);
+    font-size: 28px;
+    letter-spacing: 12px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-weight: 400;
+    font-size: clamp(2.2rem, 8vw, 3.4rem);
+    color: var(--parchment);
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.04em;
+  }
+
+  .header-line {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 28px auto 0;
+    opacity: 0.4;
+  }
+
+  /* ---- SECTIONS ---- */
+  .section {
+    background: var(--cream);
+    border-radius: 3px;
+    padding: 32px 28px;
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow: 
+      0 2px 20px rgba(0,0,0,0.15),
+      0 0 0 1px rgba(201, 168, 76, 0.08);
+  }
+
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity: 0.3;
+  }
+
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--wine-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .section p {
+    margin-bottom: 1em;
+    text-indent: 0;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ---- RITUAL SECTION (wine dipping) ---- */
+  .section.ritual {
+    background: var(--wine-deep);
+    color: var(--parchment);
+    text-align: center;
+    border: 1px solid rgba(201, 168, 76, 0.2);
+  }
+
+  .section.ritual::before {
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .section.ritual .section-number {
+    color: var(--gold);
+  }
+
+  .ritual-instruction {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--parchment-dark);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .plagues-list {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--gold-bright);
+    letter-spacing: 0.06em;
+    line-height: 2.4;
+  }
+
+  .plague-word {
+    display: inline-block;
+    padding: 0 4px;
+  }
+
+  .plague-dot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--wine-light);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 10px;
+  }
+
+  /* ---- CLOSING SECTION ---- */
+  .section.closing {
+    background: linear-gradient(170deg, var(--cream) 0%, #F5EDD8 100%);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+  }
+
+  .section.closing p:last-child {
+    font-style: italic;
+    color: var(--ink-light);
+  }
+
+  /* ---- IMAGE BREAKS ---- */
+  .image-break {
+    margin: 36px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .image-break img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 3px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+
+  .image-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--gold-dim);
+    margin-top: 10px;
+    letter-spacing: 0.03em;
+    opacity: 0.8;
+  }
+
+  /* ---- ORNAMENTAL DIVIDERS ---- */
+  .divider {
+    text-align: center;
+    padding: 20px 0;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 8px;
+    opacity: 0.5;
+  }
+
+  .divider.large {
+    padding: 32px 0;
+    font-size: 22px;
+    opacity: 0.6;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 40px 0 60px;
+  }
+
+  .footer-ornament {
+    color: var(--gold);
+    font-size: 22px;
+    letter-spacing: 10px;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .footer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--gold-dim);
+    opacity: 0.7;
+  }
+
+  /* ---- EMPHASIS WITHIN TEXT ---- */
+  .section em {
+    font-style: italic;
+  }
+
+  .section .quote-line {
+    display: block;
+    margin: 8px 0;
+    padding-left: 16px;
+    border-left: 2px solid var(--gold-dim);
+    font-style: italic;
+    color: var(--ink-light);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 480px) {
+    body { font-size: 17.5px; }
+    .section { padding: 26px 22px; }
+    header { padding: 48px 0 32px; }
+    h1 { letter-spacing: 0.01em; }
+  }
+
+  @media (min-width: 768px) {
+    body { font-size: 20px; }
+    .section { padding: 38px 36px; }
+  }
+
+  /* ---- ANIMATIONS ---- */
+  .section, .image-break {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.15s; }
+  .section:nth-child(3) { animation-delay: 0.2s; }
+
+  /* Intersection observer will handle the rest */
+  .section.visible, .image-break.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <header>
+    <span class="header-ornament">✦ ✦ ✦</span>
+    <h1>The Story of Passover</h1>
+    <span class="subtitle">A retelling for the Seder table</span>
+    <span class="header-line"></span>
+  </header>
+
+  <!-- 1 -->
+  <div class="section">
+    <span class="section-number">I</span>
+    <p>Long before any of us were born, a man named Jacob brought his family to Egypt. They came because there was famine in their land and because Jacob's son Joseph had risen, improbably, to become the Pharaoh's most trusted advisor. Egypt welcomed them. They were given good land, and for a while, they prospered. They had children, and their children had children, and over the generations the family of Jacob became a people&nbsp;— numerous, visible, and no longer guests.</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <span class="section-number">II</span>
+    <p>Then a new Pharaoh rose to power who did not remember Joseph. He looked at this growing population of foreigners and saw not neighbors but a threat. "They are too many," he said. "If war comes, they will side with our enemies." So he enslaved them. He put them to work building his cities&nbsp;— brick by brick, in the heat, under the whip. When hard labor did not break them, he ordered something worse: every son born to the Hebrews was to be thrown into the Nile.</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <span class="section-number">III</span>
+    <p>In the midst of this, a woman gave birth to a boy. She hid him for three months, and when she could hide him no longer, she set him in a basket among the reeds at the river's edge. His sister Miriam watched from a distance. It was Pharaoh's own daughter who found the child, crying in the rushes. She knew what he was. She drew him from the water and named him Moses. And in a twist that reads like fiction, she hired a Hebrew nursemaid to care for him&nbsp;— Moses's own mother. So Moses was raised in the palace as an Egyptian prince, but nursed and loved by the woman who had set him in the river. It was from her that he first learned who he truly was.</p>
+  </div>
+
+  <div class="divider">✦</div>
+
+  <!-- 4 -->
+  <div class="section">
+    <span class="section-number">IV</span>
+    <p>Moses grew up Egyptian in every way that mattered&nbsp;— educated, privileged, a prince of the most powerful empire on earth. But one day he went out and saw his people at their labor. He saw an Egyptian beating a Hebrew slave, and something broke open in him. He killed the Egyptian and buried him in the sand. When Pharaoh learned of it, Moses fled east into the desert, where he became a shepherd. He married. He had children. Years passed. He could have lived the rest of his life that way, quiet and forgotten.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <span class="section-number">V</span>
+    <p>But one day, tending his flock on a mountainside, he saw a bush that burned without being consumed. And from the fire, God spoke. "I have seen the suffering of my people in Egypt. I have heard them crying out under their oppressors. And I am sending you to bring them out." Moses resisted. He said he was nobody, that he couldn't speak well, that Pharaoh would never listen. God did not relent. "Go. Tell Pharaoh: let my people go."</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <span class="section-number">VI</span>
+    <p>So Moses returned to Egypt with his brother Aaron and stood before Pharaoh. "The God of Israel says: let my people go." Pharaoh said no. He did not recognize this God, and he would not release his labor force. To make the point, he increased the slaves' burden&nbsp;— the same quota of bricks, but now they had to gather their own straw. Moses had come to liberate his people and had only made their lives harder.</p>
+  </div>
+
+  <div class="divider large">✦ ✦ ✦</div>
+
+  <!-- 7 -->
+  <div class="section">
+    <span class="section-number">VII</span>
+    <p>What followed was a series of horrors. God sent ten plagues upon Egypt, each one worse than the last. The water of the Nile turned to blood. Frogs swarmed from the rivers and filled the houses. Lice covered every body. Flies darkened the air. A pestilence killed the livestock in the fields. Boils erupted on the skin of every Egyptian. Hail rained down and destroyed the crops. Locusts devoured what the hail had left. And then darkness&nbsp;— three days of absolute darkness, so thick it could be felt, so heavy that no one moved from where they stood.</p>
+    <p>After each plague, Pharaoh was given a chance. Sometimes he wavered. Sometimes he agreed, and then, when the suffering lifted, he hardened his heart and refused again.</p>
+  </div>
+
+  <!-- 8 — RITUAL -->
+  <div class="section ritual">
+    <span class="section-number">VIII</span>
+    <p class="ritual-instruction">We now dip a finger or spill a drop of wine for each plague&nbsp;— not in celebration, but because our joy is diminished by the suffering of others. Even our enemies. Even those who enslaved us.</p>
+    <p class="plagues-list">
+      <span class="plague-word">Blood</span><span class="plague-dot"></span><span class="plague-word">Frogs</span><span class="plague-dot"></span><span class="plague-word">Lice</span><span class="plague-dot"></span><span class="plague-word">Flies</span><span class="plague-dot"></span><span class="plague-word">Pestilence</span><br>
+      <span class="plague-word">Boils</span><span class="plague-dot"></span><span class="plague-word">Hail</span><span class="plague-dot"></span><span class="plague-word">Locusts</span><span class="plague-dot"></span><span class="plague-word">Darkness</span><span class="plague-dot"></span><span class="plague-word">Death&nbsp;of&nbsp;the&nbsp;firstborn</span>
+    </p>
+  </div>
+
+  <div class="divider">✦</div>
+
+  <!-- 9 -->
+  <div class="section">
+    <span class="section-number">IX</span>
+    <p>The tenth plague was the worst. God told Moses: at midnight, every firstborn son in Egypt will die&nbsp;— from the firstborn of Pharaoh on his throne to the firstborn of the prisoner in the dungeon. But the Israelites were to mark their doorposts with the blood of a lamb, and the angel of death would pass over their homes. That is where this night gets its name.</p>
+    <p>They were told to eat quickly that evening&nbsp;— roasted lamb, bitter herbs, and bread made without leaven, because there would be no time for the dough to rise. They ate with their sandals on and their staffs in hand, ready to leave at a moment's notice.</p>
+    <p>At midnight, it happened. A cry went up across Egypt like nothing heard before or since. Pharaoh summoned Moses in the dark. "Go," he said. "Take your people and go."</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <span class="section-number">X</span>
+    <p>They left. Hundreds of thousands of them, carrying whatever they could, with their unleavened dough wrapped in cloth on their backs. They moved fast, because Pharaoh had changed his mind before and they knew he might again.</p>
+    <p>He did. Within days, Pharaoh regretted his decision. He marshaled his chariots&nbsp;— six hundred of them&nbsp;— and pursued the Israelites to the edge of the sea. The people looked up and saw the dust of the Egyptian army behind them and the water ahead of them, and they were terrified. They turned on Moses. "Were there no graves in Egypt that you brought us out here to die?"</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="section">
+    <span class="section-number">XI</span>
+    <p>Moses stretched his hand over the sea, and the waters divided. The Israelites walked through on dry ground, walls of water on either side. When the last of them reached the far shore and the Egyptian chariots followed into the gap, the sea closed. The army of Pharaoh was swallowed whole.</p>
+    <p>Miriam took a tambourine and led the women in song on the opposite bank. The people celebrated. But there is a tradition that says God silenced the angels that day. "My creatures are drowning in the sea," God said, "and you would sing?"</p>
+  </div>
+
+  <div class="divider large">✦ ✦ ✦</div>
+
+  <!-- 12 -->
+  <div class="section">
+    <span class="section-number">XII</span>
+    <p>They were free. But freedom turned out to be harder than anyone expected. The wilderness was vast and empty and offered nothing&nbsp;— no food, no water, no shelter, no clear path. Within weeks, the people were complaining. They said Egypt was better. At least in Egypt there had been bread.</p>
+    <p>God gave them manna&nbsp;— strange food that appeared on the ground each morning like frost. They ate it for forty years. At Mount Sinai, God gave them the law&nbsp;— not just the ten commandments, but a whole framework for how to live. "You know what it is to be a stranger," God told them, "because you were strangers in the land of Egypt." The memory of slavery was not meant to be a wound they nursed. It was meant to be a commandment: because you suffered, you must not cause suffering.</p>
+  </div>
+
+  <!-- 13 -->
+  <div class="section">
+    <span class="section-number">XIII</span>
+    <p>Forty years. That is how long it took. Not because the distance was far, but because the people who had been slaves could not simply decide to be free. Freedom had to be learned. A new generation had to grow up knowing nothing but the wilderness and the law and the promise.</p>
+    <p>When they finally crossed into the promised land, Moses was not with them. He saw it from a mountaintop&nbsp;— the land flowing with milk and honey, the end of the journey he had started at a burning bush&nbsp;— and then he died, and was buried in an unmarked grave, and no one knows where it is to this day.</p>
+  </div>
+
+  <!-- 14 -->
+  <div class="section">
+    <span class="section-number">XIV</span>
+    <p>The story does not end there. The people settled the land, and lost it, and were exiled, and returned, and lost it again. The temple was built in Jerusalem, destroyed, rebuilt, and destroyed again. The Jewish people were scattered across the earth for two thousand years&nbsp;— to every continent, through every kind of persecution&nbsp;— and through all of it, every year, wherever they were, they sat down to a meal like this one and told this story and said to each other: <em>next year in Jerusalem.</em></p>
+    <p>That longing never went away. It is the last line of the Seder because it is the thread that runs through everything&nbsp;— the promise made in the wilderness, carried through exile after exile, all the way to the present day.</p>
+  </div>
+
+  <div class="divider">✦</div>
+
+  <!-- 15 -->
+  <div class="section closing">
+    <span class="section-number">XV</span>
+    <p>This is the story we are commanded to tell. Not just to remember it, but to feel as though we ourselves came out of Egypt. Every generation is asked to see itself in this narrative&nbsp;— to find where they are in it, and to wrestle with what it asks of them.</p>
+    <p>Tonight, we eat the bread that did not rise, because our ancestors left in haste. We taste the bitter herbs, because they were slaves. We dip our food in salt water, because there were tears. And we lean to the left when we drink our wine, because tonight, we are free.</p>
+  </div>
+
+  <footer>
+    <span class="footer-ornament">✦</span>
+    <span class="footer-text">Next year in Jerusalem</span>
+  </footer>
+
+</div>
+
+<script>
+  // Gentle fade-in as sections scroll into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // Reset initial state and observe all sections after first few
+  document.querySelectorAll('.section, .image-break').forEach((el, i) => {
+    if (i > 2) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    }
+  });
+</script>
+
+</body>
+</html>
